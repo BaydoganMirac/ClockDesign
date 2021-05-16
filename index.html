@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clock Design</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Clock Design">
+	<meta name="keywords" content="HTML, CSS, JavaScript">
+	<meta name="author" content="BaydoganMirac">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			transition: all .2s;
+		}
+		body{
+			background-color: #222;
+			width: 100%;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		ul{
+			list-style: none;
+			margin: 10px;
+		}
+		.container{
+			display: flex;
+			justify-content: baseline;
+			height: 100%;
+			overflow-y: hidden;
+		}
+		.hour, .minute, .second {
+			display: flex;
+			justify-content: center;
+			position: relative;
+			height: 100%;
+			padding-top: 40vh;
+			margin: 0px 5px 0px 5px;
+		}
+		.stick{
+			background-color: #696969;
+			padding: 10px;
+			border-radius: 10px;
+			color: white;
+			width: 50px;
+			text-align: center;
+			font-size: 30px;
+			font-family: 'Roboto', sans-serif;
+			box-shadow: 1px 1px 20px 1px #fff;
+			height: auto;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin:0px 30px 0px 30px ;
+		}
+		.stick > li {
+			height: 35px;
+		}
+		.twoDots{
+			font-size: 50px;
+			color: white;
+			height: 50%;
+			font-weight: bold;
+			text-shadow: 1px 1px 5px #fff;
+			margin-top: 40vh;
+		}
+		.active{
+			position: absolute;
+			height: 100px;
+			width: 100px;
+			background: rgba(204, 204, 204, 0.555);
+			box-shadow: 1px 1px 10px 2px  rgba(255, 255, 255, 0.445);
+			backdrop-filter: blur( 2.0px );
+			-webkit-backdrop-filter: blur( 2.0px );
+			border-radius: 100%;
+			border: 1px solid rgba(75, 74, 74, 0.151);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-size: 35px;
+			font-weight: bold;
+			font-family:  'Roboto', sans-serif;
+			text-shadow: 1px 1px 4px #fff;
+		}
+		.secondFirstStick{
+			height: 350px;
+		}
+		.secondSecondStick{
+			height: 210px;
+		}
+		.minuteFirstStick{
+			height: 350px;
+		}
+		.minuteSecondStick{
+			height: 210px;
+		}
+		.hourFirstStick{
+			height: 350px;
+		}
+		.hourSecondStick{
+			height: 110px;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="hour">
+
+		<ul class="stick hourSecondStick">
+			<div class="active firstActive"  style="margin-top: -35px">0</div>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+		</ul>
+		<ul class="stick hourFirstStick">
+			<div class="active firstActive"  style="margin-top: -35px">0</div>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+		</ul>
+	</div>
+	<span class="twoDots">:</span>
+	<div class="minute">
+		<ul class="stick minuteSecondStick">
+			<div class="active firstActive"  style="margin-top: -35px">0</div>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul class="stick minuteFirstStick">
+			<div class="active firstActive"  style="margin-top: -35px">0</div>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+		</ul>
+	</div>
+	<span class="twoDots">:</span>
+	<div class="second">
+		<ul class="stick secondSecondStick ">
+			<div class="active firstActive"  style="margin-top: -35px">0</div>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+		<ul class="stick secondFirstStick">
+			<div class="active firstActive" style="margin-top: -35px">0</div>
+			<li>0</li>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+		</ul>
+	</div>
+</div>
+<script>
+	var hour = "00";
+	var minute = "00";
+	var second = "00";
+		setInterval(function(){
+		hour = String(new Date().getHours()) < 10 ? String("0" + new Date().getHours()) : String(new Date().getHours());
+		minute = String(new Date().getMinutes()) < 10 ? String("0" + new Date().getMinutes()) : String(new Date().getMinutes()) ;
+		second = String(new Date().getSeconds()) < 10 ? String("0" + new Date().getSeconds()) : String(new Date().getSeconds()) ;
+		var secondFirstStick = document.querySelector('.secondFirstStick');	
+		secondFirstStick.style.marginTop = -second[1]*35+"px";
+		secondFirstStick.children[0].style.marginTop = (second[1]*35)-35+"px";
+		secondFirstStick.children[0].innerHTML = second[1];
+		
+		
+		var secondSecondStick = document.querySelector('.secondSecondStick');
+		secondSecondStick.style.marginTop = -second[0]*35+"px";
+		secondSecondStick.children[0].style.marginTop = (second[0]*35)-35+"px";
+		secondSecondStick.children[0].innerHTML = second[0];
+
+		var minuteFirstStick = document.querySelector('.minuteFirstStick');	
+		minuteFirstStick.style.marginTop = -minute[1]*35+"px";
+		minuteFirstStick.children[0].style.marginTop = (minute[1]*35)-35+"px";
+		minuteFirstStick.children[0].innerHTML = minute[1];
+		
+		
+		var minuteSecondStick = document.querySelector('.minuteSecondStick');
+		minuteSecondStick.style.marginTop = -minute[0]*35+"px";
+		minuteSecondStick.children[0].style.marginTop = (minute[0]*35)-35+"px";
+		minuteSecondStick.children[0].innerHTML = minute[0];
+
+		var hourFirstStick = document.querySelector('.hourFirstStick');	
+		hourFirstStick.style.marginTop = -hour[1]*35+"px";
+		hourFirstStick.children[0].style.marginTop = (hour[1]*35)-35+"px";
+		hourFirstStick.children[0].innerHTML = hour[1];
+		
+		
+		var hourSecondStick = document.querySelector('.hourSecondStick');
+		hourSecondStick.style.marginTop = -hour[0]*35+"px";
+		hourSecondStick.children[0].style.marginTop = (hour[0]*35)-35+"px";
+		hourSecondStick.children[0].innerHTML = hour[0];
+
+	}, 1000);
+
+</script>
+</body>
+</html>
